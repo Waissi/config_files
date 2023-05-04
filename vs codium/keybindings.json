@@ -306,5 +306,19 @@
         "key": "ctrl+up",
         "command": "-list.scrollUp",
         "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "f7",
+        "command": "-editor.action.wordHighlight.next",
+        "when": "editorTextFocus && hasWordHighlights"
+    },
+    {
+        "key": "f7",
+        "command": "-editor.action.diffReview.next",
+        "when": "isInDiffEditor"
+    },
+    {
+        "key": "f7",
+        "command": "workbench.action.tasks.test"
     }
 ]
