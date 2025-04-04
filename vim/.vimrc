@@ -1,5 +1,4 @@
 syntax on
-colorscheme habamax
 let mapleader = "\<Space>"
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -16,6 +15,8 @@ set wildmenu
 set number
 set wildignore+=*.md
 call plug#begin()
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'euclidianAce/BetterLua.vim'
 Plug 'mhinz/vim-startify'
 call plug#end()
+colorscheme one
