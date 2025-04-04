@@ -14,3 +14,8 @@ set expandtab
 set autoindent
 set wildmenu
 set number
+set wildignore+=*.md
+call plug#begin()
+Plug 'euclidianAce/BetterLua.vim'
+Plug 'mhinz/vim-startify'
+call plug#end()
