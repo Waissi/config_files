@@ -13,6 +13,7 @@ set expandtab
 set autoindent
 set wildmenu
 set number
+set viminfo="NONE"
 set wildignore+=*.md
 call plug#begin()
 Plug 'rafi/awesome-vim-colorschemes'
