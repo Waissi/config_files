@@ -5,6 +5,7 @@ nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
+nnoremap <Tab> <C-W><C-W><cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
 nnoremap <S-j> <C-f><c>
