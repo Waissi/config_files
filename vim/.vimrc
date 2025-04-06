@@ -4,12 +4,13 @@ nnoremap <leader>w :bdelete<cr>
 nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
+nnoremap <leader>p :find 
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
 nnoremap <S-j> <C-f><c>
 nnoremap <S-k> <C-b><cr>
-nnoremap <leader>p :find 
 nnoremap <F6> :!scripts/run.sh<cr>
+nnoremap <F7> :!git_commit <cr>
 set path+=**
 set tabstop=4
 set shiftwidth=4
@@ -29,10 +30,3 @@ Plug 'euclidianAce/BetterLua.vim'
 Plug 'mhinz/vim-startify'
 call plug#end()
 colorscheme one
-
-function! GitCommit()
-    let message =  input('Commit message: ')
-    execute '!git_commit' message
-endfunction
-nnoremap <F7> :call GitCommit() <cr>
-
