@@ -1,7 +1,7 @@
 syntax on
 let mapleader = "\<Space>"
 nnoremap <leader>w :bdelete<cr>
-nnoremap <leader>e :Explore<cr>
+nnoremap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <S-l> :bnext<cr>
@@ -20,6 +20,7 @@ set wildignore+=*.md
 call plug#begin()
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'euclidianAce/BetterLua.vim'
+Plug 'preservim/nerdtree'
 Plug 'mhinz/vim-startify'
 call plug#end()
 colorscheme one
