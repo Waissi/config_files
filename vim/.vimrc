@@ -9,9 +9,9 @@ nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . &filetype<cr>
 nnoremap <leader>F :execute 'vimgrep ' . '/' . expand('<cword>') . '/' '**/*.' . &filetype<cr>  
 nnoremap <Tab> <C-W><C-W><cr>
 nnoremap <S-l> :bnext<cr>
-nnoremap <S-L> :cnext<cr>
+nnoremap <S-n> :cnext<cr>
 nnoremap <S-h> :bprevious<cr>
-nnoremap <S-H> :cprevious<cr>
+nnoremap <S-p> :cprevious<cr>
 nnoremap <S-j> <C-f><c>
 nnoremap <S-k> <C-b><cr>
 nnoremap <F6> :!scripts/run.sh<cr>
