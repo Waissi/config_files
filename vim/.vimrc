@@ -5,6 +5,7 @@ nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
+nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . &filetype<cr>
 nnoremap <Tab> <C-W><C-W><cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -19,6 +20,7 @@ set expandtab
 set autoindent
 set wildmenu
 set number
+filetype on
 set viminfo="NONE"
 set wildignore+=*.md
 let g:netrw_winsize = 25
