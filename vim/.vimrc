@@ -15,7 +15,6 @@ nnoremap <S-H> :cprevious<cr>
 nnoremap <S-j> <C-f><c>
 nnoremap <S-k> <C-b><cr>
 nnoremap <F6> :!scripts/run.sh<cr>
-nnoremap <F7> :!git_commit <cr>
 set path+=**
 set tabstop=4
 set shiftwidth=4
