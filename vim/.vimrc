@@ -19,6 +19,7 @@ nnoremap <S-k> <C-b><cr>
 nnoremap <S-f> :execute '/' . expand('<cword>')<CR>
 nnoremap <F6> :!scripts/run.sh<cr>
 set path+=**
+set title
 set tabstop=4
 set shiftwidth=4
 set expandtab
