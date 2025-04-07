@@ -9,14 +9,12 @@ nnoremap <leader>p :find
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . &filetype<cr>
 nnoremap <leader>F :execute 'vimgrep ' . '/' . expand('<cword>') . '/' '**/*.' . &filetype<cr>  
 nnoremap <leader>S :Startify<cr>
-nnoremap <Tab> <C-W><C-W><cr>
 nnoremap <S-l> :bnext<cr>
-nnoremap <S-n> :cnext<cr>
 nnoremap <S-h> :bprevious<cr>
-nnoremap <S-p> :cprevious<cr>
-nnoremap <S-j> <C-f><c>
+nnoremap <S-j> <C-f><cr>
 nnoremap <S-k> <C-b><cr>
-nnoremap <S-f> :execute '/' . expand('<cword>')<CR>
+nnoremap <Up> :cprevious<cr>
+nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
 set path+=**
 set title
