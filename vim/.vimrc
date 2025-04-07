@@ -38,3 +38,10 @@ Plug 'euclidianAce/BetterLua.vim'
 Plug 'mhinz/vim-startify'
 call plug#end()
 colorscheme one
+
+function! FindAndReplace()
+    let old = expand('<cword>')
+    let new = input("Replace with: ")
+    execute '%s/' . old . '/' . new . '/gc' 
+endfunction
+nnoremap <S-r> :call FindAndReplace()<cr>
