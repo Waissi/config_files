@@ -32,7 +32,7 @@ let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 call plug#begin()
 Plug 'euclidianAce/BetterLua.vim'
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'rakr/vim-one'
 Plug 'mhinz/vim-startify'
 Plug 'bfrg/vim-c-cpp-modern'
 call plug#end()

@@ -7,7 +7,7 @@ map("n", "<leader>w", ":bdelete<CR>", opts)
 map("n", "<leader>e", ":Lexplore<CR>", opts)
 map("n", "<leader>s", ":w<CR>", opts)
 map("n", "<leader>q", ":q<CR>", opts)
-map("n", "<leader>p", ":find ", opts)
+map("n", "<leader>p", ":find ", {})
 map("n", "<leader>f", [[:execute 'find ' .. expand('<cword>') .. '.' .. &filetype<CR>]], {})
 map("n", "<leader>F", [[:execute 'vimgrep /' .. expand('<cword>') .. '/' '**/*.' .. &filetype<CR>]], {})
 map("n", "<leader>S", ":Startify<CR>", opts)
@@ -34,16 +34,27 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 
 vim.cmd([[
-call plug#begin('~/.vim/plugged')
-Plug 'rakr/vim-one'
+call plug#begin('~/.config/nvim/plugged')
+Plug 'folke/tokyonight.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'neovim/nvim-lspconfig'
 call plug#end()
 ]])
-vim.cmd("colorscheme one")
+vim.cmd("colorscheme tokyonight-night")
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#b0b0b0" })
 vim.g.startify_lists = {
   { type = 'sessions', header = {'   Saved Sessions'} },
 }
+
+vim.api.nvim_set_keymap('n', 'R', [[:lua FindAndReplace()<CR>]], { noremap = true, silent = true })
+
+function FindAndReplace()
+  local old = vim.fn.expand('<cword>')
+  local new = vim.fn.input("Replace " .. old .. " with: ")
+  if new ~= "" then
+    vim.cmd('%s/' .. old .. '/' .. new .. '/gc')
+  end
+end
 
 require'lspconfig'.lua_ls.setup {
   on_init = function(client)
