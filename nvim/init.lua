@@ -1,11 +1,8 @@
 vim.cmd("syntax on")
 vim.cmd("filetype on")
-
 vim.g.mapleader = " "
-
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-
 map("n", "<leader>w", ":bdelete<CR>", opts)
 map("n", "<leader>e", ":Lexplore<CR>", opts)
 map("n", "<leader>s", ":w<CR>", opts)
@@ -38,25 +35,19 @@ vim.g.netrw_banner = 0
 
 vim.cmd([[
 call plug#begin('~/.vim/plugged')
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'rakr/vim-one'
 Plug 'mhinz/vim-startify'
 Plug 'neovim/nvim-lspconfig'
 call plug#end()
 ]])
+vim.cmd("colorscheme one")
 vim.g.startify_lists = {
   { type = 'sessions', header = {'   Saved Sessions'} },
 }
 
-vim.cmd("colorscheme one")
 require'lspconfig'.lua_ls.setup {
   on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc')) then
-        return
-      end
-    end
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
         version = 'LuaJIT'
       },
