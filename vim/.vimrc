@@ -39,7 +39,7 @@ colorscheme one
 
 function! FindAndReplace()
     let old = expand('<cword>')
-    let new = input("Replace with: ")
+    let new = input("Replace " . old . " with: ")
     execute '%s/' . old . '/' . new . '/gc' 
 endfunction
 nnoremap <S-r> :call FindAndReplace()<cr>
