@@ -46,7 +46,7 @@ vim.g.startify_lists = {
     { type = 'sessions', header = { '   Saved Sessions' } },
 }
 
-vim.api.nvim_set_keymap('n', 'R', [[:lua FindAndReplace()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'R', [[:lua FindAndReplace()<CR>]], opts)
 
 function FindAndReplace()
     local old = vim.fn.expand('<cword>')
@@ -68,7 +68,7 @@ require 'lspconfig'.lua_ls.setup {
                     vim.env.VIMRUNTIME,
                     "${3rd}/love2d/library"
                 }
-            }
+            },
         })
     end,
     settings = {
@@ -76,6 +76,7 @@ require 'lspconfig'.lua_ls.setup {
     }
 }
 require 'lspconfig'.terraformls.setup {}
+require 'lspconfig'.pyright.setup {}
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*.tf", "*.tfvars", "*.lua" },
