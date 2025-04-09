@@ -39,7 +39,6 @@ Plug 'folke/tokyonight.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'neovim/nvim-lspconfig'
 vim.call('plug#end')
-
 vim.cmd("colorscheme tokyonight-night")
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#b0b0b0" })
 vim.g.startify_lists = {
