@@ -7,7 +7,7 @@ map("n", "<leader>w", ":bdelete<CR>", opts)
 map("n", "<leader>e", ":Lexplore<CR>", opts)
 map("n", "<leader>s", ":w<CR>", opts)
 map("n", "<leader>q", ":q<CR>", opts)
-map("n", "<leader>p", ":find ", {noremap = true})
+map("n", "<leader>p", ":find ", { noremap = true })
 map("n", "<leader>f", [[:execute 'find ' .. expand('<cword>') .. '.' .. &filetype<CR>]], opts)
 map("n", "<leader>F", [[:execute 'vimgrep /' .. expand('<cword>') .. '/' '**/*.' .. &filetype<CR>]], opts)
 map("n", "<leader>S", ":Startify<CR>", opts)
@@ -43,7 +43,7 @@ vim.call('plug#end')
 vim.cmd("colorscheme tokyonight-night")
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#b0b0b0" })
 vim.g.startify_lists = {
-    { type = 'sessions', header = {'   Saved Sessions'} },
+    { type = 'sessions', header = { '   Saved Sessions' } },
 }
 
 vim.api.nvim_set_keymap('n', 'R', [[:lua FindAndReplace()<CR>]], { noremap = true, silent = true })
@@ -56,22 +56,30 @@ function FindAndReplace()
     end
 end
 
-require'lspconfig'.lua_ls.setup {
-  on_init = function(client)
-      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-          runtime = {
-              version = 'LuaJIT'
-          },
-          workspace = {
-              checkThirdParty = false,
-              library = {
-                  vim.env.VIMRUNTIME,
-                  "${3rd}/love2d/library"
-             }
-          }
-     })
-  end,
-  settings = {
-      Lua = {}
-  }
+require 'lspconfig'.lua_ls.setup {
+    on_init = function(client)
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+                version = 'LuaJIT'
+            },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    "${3rd}/love2d/library"
+                }
+            }
+        })
+    end,
+    settings = {
+        Lua = {}
+    }
 }
+require 'lspconfig'.terraformls.setup {}
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*.tf", "*.tfvars", "*.lua" },
+    callback = function()
+        vim.lsp.buf.format()
+    end,
+})
