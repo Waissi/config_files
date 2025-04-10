@@ -1,15 +1,21 @@
-" PLUGINS
+"
+"                                                 PLUGINS
+"
+
 call plug#begin()
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'mhinz/vim-startify', {'branch': 'center'}
+Plug 'mhinz/vim-startify'
 Plug 'bfrg/vim-c-cpp-modern'
 Plug 'euclidianAce/BetterLua.vim'
 call plug#end()
 
 
-" GLOBAL SETUP
+"                                               
+"                                               GLOBAL SETUP
+"
+
 filetype on
 set path+=**
 set tabstop=4
@@ -29,13 +35,14 @@ let mapleader = "\<Space>"
 let g:asyncomplete_auto_popup = 0
 let g:startify_custom_header = []
 let g:startify_enable_quote = 0
-let g:startify_center = 50
-let g:startify_padding_left = (winwidth('%') - g:startify_center / 2) / 2
 colorscheme slate 
 highlight LineNr ctermfg=LightGrey
+highlight Comment ctermfg=Lightgrey cterm=italic
 
+"
+"                                                  KEYMAPS
+"
 
-" KEYMAPS
 nnoremap <leader>w :bdelete<cr>
 nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>s :w<cr>
@@ -71,8 +78,10 @@ inoremap <silent><expr> <TAB>
     \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+" 
+"                                                 LSP SETUP
+"
 
-" LSP SETUP
 autocmd BufWritePre * call s:format_buffer()
 
 function! s:format_buffer() abort
