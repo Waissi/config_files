@@ -55,26 +55,35 @@ function! FindAndReplace()
 endfunction
 nnoremap <S-r> :call FindAndReplace()<cr>
 
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 
 " LSP SETUP
+autocmd BufWritePre * call s:format_buffer()
+
+function! s:format_buffer() abort
+    if &modifiable && &filetype != ''
+        LspDocumentFormatSync
+    endif
+endfunction
+
 if executable('lua-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'lua-language-server',
         \ 'cmd': {server_info->['lua-language-server']},
         \ 'allowlist': ['lua'],
-        \ })
+        \
+    })
 endif
 
 if executable('terraform-ls')
@@ -82,7 +91,8 @@ if executable('terraform-ls')
         \ 'name': 'terraform-ls',
         \ 'cmd': {server_info->['terraform-ls', 'serve']},
         \ 'allowlist': ['terraform'],
-        \ })
+        \
+    })
 endif
 
 function! s:on_lsp_buffer_enabled() abort
@@ -101,7 +111,6 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> <leader>k <plug>(lsp-hover)
     nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
     nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
-
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 endfunction
