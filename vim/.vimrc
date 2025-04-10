@@ -3,12 +3,12 @@
 "
 
 call plug#begin()
-Plug 'vim-python/python-syntax'
+Plug 'mhinz/vim-startify'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'mhinz/vim-startify'
 Plug 'bfrg/vim-c-cpp-modern'
+Plug 'vim-python/python-syntax'
 Plug 'euclidianAce/BetterLua.vim'
 call plug#end()
 
@@ -18,21 +18,21 @@ call plug#end()
 "
 
 filetype on
+set expandtab
+set autoindent
+set wildmenu
+set number
 set path+=**
 set tabstop=4
 set laststatus=2
 set statusline=%F
 set shiftwidth=4
-set expandtab
-set autoindent
-set wildmenu
-set number
 set viminfo="NONE"
 set wildignore+=*.md
+let mapleader = "\<Space>"
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
-let mapleader = "\<Space>"
 let g:asyncomplete_auto_popup = 0
 let g:startify_custom_header = []
 let g:startify_enable_quote = 0
@@ -83,13 +83,13 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "                                                 LSP SETUP
 "
 
-autocmd BufWritePre * call s:format_buffer()
 
 function! s:format_buffer() abort
     if &modifiable && &filetype != ''
         LspDocumentFormatSync
     endif
 endfunction
+autocmd BufWritePre * call s:format_buffer()
 
 if executable('lua-language-server')
     au User lsp_setup call lsp#register_server({
@@ -100,7 +100,6 @@ if executable('lua-language-server')
 endif
 
 if executable('pylsp')
-    " pip install python-lsp-server
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pylsp',
         \ 'cmd': {server_info->['pylsp']},
