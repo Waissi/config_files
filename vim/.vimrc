@@ -17,8 +17,9 @@ nnoremap <Up> :cprevious<cr>
 nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
 set path+=**
-set title
 set tabstop=4
+set laststatus=2
+set statusline=%F
 set shiftwidth=4
 set expandtab
 set autoindent
