@@ -1,6 +1,37 @@
-syntax on
+" PLUGINS
+call plug#begin()
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mhinz/vim-startify'
+Plug 'bfrg/vim-c-cpp-modern'
+Plug 'euclidianAce/BetterLua.vim'
+call plug#end()
+
+
+" GLOBAL SETUP
 filetype on
+set path+=**
+set tabstop=4
+set laststatus=2
+set statusline=%F
+set shiftwidth=4
+set expandtab
+set autoindent
+set wildmenu
+set number
+set viminfo="NONE"
+set wildignore+=*.md
+let g:netrw_winsize = 25
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
 let mapleader = "\<Space>"
+let g:asyncomplete_auto_popup = 0
+colorscheme slate 
+highlight LineNr ctermfg=LightGrey
+
+
+" KEYMAPS
 nnoremap <leader>w :bdelete<cr>
 nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>s :w<cr>
@@ -16,31 +47,6 @@ nnoremap <S-k> <C-b><cr>
 nnoremap <Up> :cprevious<cr>
 nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
-set path+=**
-set tabstop=4
-set laststatus=2
-set statusline=%F
-set shiftwidth=4
-set expandtab
-set autoindent
-set wildmenu
-set number
-set viminfo="NONE"
-set wildignore+=*.md
-let g:netrw_winsize = 25
-let g:netrw_liststyle = 3
-"let g:netrw_keepdir = 0
-let g:netrw_banner = 0
-call plug#begin()
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'mhinz/vim-startify'
-Plug 'bfrg/vim-c-cpp-modern'
-Plug 'euclidianAce/BetterLua.vim'
-call plug#end()
-colorscheme slate 
-highlight LineNr ctermfg=LightGrey
 
 function! FindAndReplace()
     let old = expand('<cword>')
@@ -50,7 +56,7 @@ endfunction
 nnoremap <S-r> :call FindAndReplace()<cr>
 
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-let g:asyncomplete_auto_popup = 0
+
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
@@ -61,6 +67,8 @@ inoremap <silent><expr> <TAB>
   \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+
+" LSP SETUP
 if executable('lua-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'lua-language-server',
@@ -96,11 +104,9 @@ function! s:on_lsp_buffer_enabled() abort
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-
-    " refer to doc to add more commands
 endfunction
 
 augroup lsp_install
     au!
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+augroup ENDsyntax on
