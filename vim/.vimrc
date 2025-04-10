@@ -82,8 +82,7 @@ if executable('lua-language-server')
         \ 'name': 'lua-language-server',
         \ 'cmd': {server_info->['lua-language-server']},
         \ 'allowlist': ['lua'],
-        \
-    })
+        \ })
 endif
 
 if executable('terraform-ls')
@@ -91,8 +90,7 @@ if executable('terraform-ls')
         \ 'name': 'terraform-ls',
         \ 'cmd': {server_info->['terraform-ls', 'serve']},
         \ 'allowlist': ['terraform'],
-        \
-    })
+        \ })
 endif
 
 function! s:on_lsp_buffer_enabled() abort
