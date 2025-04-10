@@ -3,6 +3,7 @@
 "
 
 call plug#begin()
+Plug 'vim-python/python-syntax'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -35,10 +36,10 @@ let mapleader = "\<Space>"
 let g:asyncomplete_auto_popup = 0
 let g:startify_custom_header = []
 let g:startify_enable_quote = 0
+let g:python_highlight_all = 1
 colorscheme slate 
 highlight LineNr ctermfg=LightGrey
 highlight Comment ctermfg=Lightgrey cterm=italic
-
 "
 "                                                  KEYMAPS
 "
@@ -95,6 +96,23 @@ if executable('lua-language-server')
         \ 'name': 'lua-language-server',
         \ 'cmd': {server_info->['lua-language-server']},
         \ 'allowlist': ['lua'],
+        \ })
+endif
+
+if executable('pylsp')
+    " pip install python-lsp-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['pylsp']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'allowlist': ['c'],
         \ })
 endif
 
