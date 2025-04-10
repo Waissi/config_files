@@ -32,10 +32,12 @@ let g:netrw_liststyle = 3
 "let g:netrw_keepdir = 0
 let g:netrw_banner = 0
 call plug#begin()
-Plug 'euclidianAce/BetterLua.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mhinz/vim-startify'
 Plug 'bfrg/vim-c-cpp-modern'
-Plug 'prabirshrestha/vim-lsp'
+Plug 'euclidianAce/BetterLua.vim'
 call plug#end()
 colorscheme slate 
 highlight LineNr ctermfg=LightGrey
@@ -46,6 +48,18 @@ function! FindAndReplace()
     execute '%s/' . old . '/' . new . '/gc' 
 endfunction
 nnoremap <S-r> :call FindAndReplace()<cr>
+
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+let g:asyncomplete_auto_popup = 0
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 if executable('lua-language-server')
     au User lsp_setup call lsp#register_server({
