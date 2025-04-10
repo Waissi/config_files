@@ -37,6 +37,8 @@ Plug 'bfrg/vim-c-cpp-modern'
 Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 colorscheme slate 
+highlight LineNr ctermfg=LightGrey
+
 function! FindAndReplace()
     let old = expand('<cword>')
     let new = input("Replace " . old . " with: ")
