@@ -49,6 +49,7 @@ nnoremap <leader>e :Lexplore<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
+nnoremap <leader>t :terminal<cr>
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . &filetype<cr>
 nnoremap <leader>F :execute 'vimgrep ' . '/' . expand('<cword>') . '/' '**/*.' . &filetype<cr>  
 nnoremap <leader>S :Startify<cr>
