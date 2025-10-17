@@ -10,6 +10,9 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'bfrg/vim-c-cpp-modern'
 Plug 'vim-python/python-syntax'
 Plug 'euclidianAce/BetterLua.vim'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()
 
 
@@ -45,7 +48,7 @@ highlight Comment ctermfg=Lightgrey cterm=italic
 "
 
 nnoremap <leader>w :bdelete<cr>
-nnoremap <leader>e :Lexplore<cr>
+nnoremap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
@@ -138,8 +141,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> <leader>k <plug>(lsp-hover)
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+    nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 endfunction
