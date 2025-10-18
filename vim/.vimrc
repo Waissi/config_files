@@ -32,14 +32,13 @@ set statusline=%F
 set shiftwidth=4
 set viminfo="NONE"
 set wildignore+=*.md
+
 let mapleader = "\<Space>"
-let g:netrw_winsize = 25
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
 let g:asyncomplete_auto_popup = 0
 let g:startify_custom_header = []
 let g:startify_enable_quote = 0
 let g:python_highlight_all = 1
+
 colorscheme slate 
 highlight LineNr ctermfg=LightGrey
 highlight Comment ctermfg=Lightgrey cterm=italic
