@@ -40,8 +40,13 @@ let g:startify_custom_header = []
 let g:startify_enable_quote = 0
 let g:python_highlight_all = 1
 
-colorscheme onehalfdark 
+colorscheme minimalist 
 highlight Normal ctermbg=NONE
+highlight NonText ctermbg=NONE
+highlight NormalNC ctermbg=NONE
+highlight StatusLine ctermbg=NONE
+highlight EndOfBuffer ctermbg=NONE
+highlight SignColumn ctermbg=NONE
 highlight LineNr ctermfg=Grey ctermbg=NONE
 highlight Comment ctermfg=Lightgrey cterm=italic
 "
