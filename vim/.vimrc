@@ -13,6 +13,7 @@ Plug 'euclidianAce/BetterLua.vim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()
 
 
@@ -39,8 +40,9 @@ let g:startify_custom_header = []
 let g:startify_enable_quote = 0
 let g:python_highlight_all = 1
 
-colorscheme slate 
-highlight LineNr ctermfg=LightGrey
+colorscheme onehalfdark 
+highlight Normal ctermbg=NONE
+highlight LineNr ctermfg=Grey ctermbg=NONE
 highlight Comment ctermfg=Lightgrey cterm=italic
 "
 "                                                  KEYMAPS
