@@ -22,6 +22,7 @@ call plug#end()
 "
 
 filetype on
+syntax on
 set expandtab
 set autoindent
 set wildmenu
@@ -39,6 +40,8 @@ let g:asyncomplete_auto_popup = 0
 let g:startify_custom_header = []
 let g:startify_enable_quote = 0
 let g:python_highlight_all = 1
+let NERDTreeShowHidden=1
+let g:NERDTreeIgnore = ['\.DS_Store$']
 
 colorscheme minimalist 
 highlight Normal ctermbg=NONE
@@ -49,6 +52,8 @@ highlight EndOfBuffer ctermbg=NONE
 highlight SignColumn ctermbg=NONE
 highlight LineNr ctermfg=Grey ctermbg=NONE
 highlight Comment ctermfg=Lightgrey cterm=italic
+highlight NERDTreeDir ctermfg=LightMagenta
+highlight NERDTreeFile ctermfg=LightGrey
 "
 "                                                  KEYMAPS
 "
