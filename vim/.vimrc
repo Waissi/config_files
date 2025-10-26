@@ -65,7 +65,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
 nnoremap <leader>t :terminal<cr>
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . &filetype<cr>
-nnoremap <leader>F :execute 'vimgrep ' . '/' . expand('<cword>') . '/' '**/*.' . &filetype<cr>  
+nnoremap <leader>F :execute 'vimgrep ' . '/\<' . expand('<cword>') . '\>/' '**/*.' . &filetype<cr>  
 nnoremap <leader>S :Startify<cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -74,6 +74,12 @@ nnoremap <S-k> <C-b><cr>
 nnoremap <Up> :cprevious<cr>
 nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
+
+function! GlobalSearch()
+    let word = input("Type word to search:")
+    execute 'vimgrep ' . '/\<' . word . '\>/' '**/*.' . &filetype
+endfunction
+nnoremap <c-f> :call GlobalSearch()<cr>
 
 function! FindAndReplace()
     let old = expand('<cword>')
