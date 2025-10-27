@@ -54,6 +54,7 @@ highlight LineNr ctermfg=Grey ctermbg=NONE
 highlight Comment ctermfg=Lightgrey cterm=italic
 highlight NERDTreeDir ctermfg=LightMagenta
 highlight NERDTreeFile ctermfg=LightGrey
+highlight Visual ctermbg=Grey
 "
 "                                                  KEYMAPS
 "
@@ -64,8 +65,8 @@ nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
 nnoremap <leader>t :terminal<cr>
-nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . &filetype<cr>
-nnoremap <leader>F :execute 'vimgrep ' . '/\<' . expand('<cword>') . '\>/' '**/*.' . &filetype<cr>  
+nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . expand("%:e")<cr>
+nnoremap <leader>F :execute 'vimgrep ' . '/\<' . expand('<cword>') . '\>/' '**/*.' . expand("%:e")<cr>  
 nnoremap <leader>S :Startify<cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -77,7 +78,7 @@ nnoremap <F6> :!scripts/run.sh<cr>
 
 function! GlobalSearch()
     let word = input("Type word to search:")
-    execute 'vimgrep ' . '/\<' . word . '\>/' '**/*.' . &filetype
+    execute 'vimgrep ' . '/\<' . word . '\>/' '**/*.' . expand("%:e")
 endfunction
 nnoremap <c-f> :call GlobalSearch()<cr>
 
