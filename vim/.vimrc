@@ -25,6 +25,7 @@ filetype on
 syntax on
 set expandtab
 set autoindent
+set smartindent 
 set wildmenu
 set number
 set path+=**
@@ -34,6 +35,7 @@ set statusline=%F
 set shiftwidth=4
 set viminfo="NONE"
 set wildignore+=*.md
+
 
 let mapleader = "\<Space>"
 let g:asyncomplete_auto_popup = 0
@@ -88,6 +90,19 @@ function! FindAndReplace()
     execute '%s/' . old . '/' . new . '/gc' 
 endfunction
 nnoremap <S-r> :call FindAndReplace()<cr>
+
+function! SetBreakpoint()
+    let text = ''
+    let type = &filetype
+    if type ==# 'python'
+        let text = 'breakpoint()'
+    elseif type ==# 'lua'
+        let text = 'dbg()'
+    endif
+    let indt = indent(line('.'))
+    call append(line('.') - 1, repeat(' ', indt) . text)
+endfunction
+nnoremap <leader>b :call SetBreakpoint()<cr>
 
 inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
