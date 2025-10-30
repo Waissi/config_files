@@ -78,11 +78,7 @@ nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
 
 function! GlobalSearch(word='')
-    if a:word == ''
-        let word = input("Type word to search:")
-    else
-        let word = a:word
-    endif
+    let word = a:word != '' ? a:word : input("Type word to search:")
     let extension = "--include='*." . expand("%:e") . "'"
     execute 'grep ' . word . ' . ' . '-w -r ' . extension
 endfunction
