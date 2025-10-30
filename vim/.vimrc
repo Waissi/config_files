@@ -68,7 +68,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
 nnoremap <leader>t :terminal<cr>
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . expand("%:e")<cr>
-nnoremap <leader>F :execute 'vimgrep ' . '/\<' . expand('<cword>') . '\>/' '**/*.' . expand("%:e")<cr>  
+nnoremap <leader>F :execute 'grep ' . expand('<cword>') . ' . ' . '-r --include=*.' . expand("%:e")<cr>  
 nnoremap <leader>S :Startify<cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -80,7 +80,7 @@ nnoremap <F6> :!scripts/run.sh<cr>
 
 function! GlobalSearch()
     let word = input("Type word to search:")
-    execute 'vimgrep ' . '/\<' . word . '\>/' '**/*.' . expand("%:e")
+    execute 'grep ' . word . ' . ' . '-r --include=*.' . expand("%:e")
 endfunction
 nnoremap <c-f> :call GlobalSearch()<cr>
 
