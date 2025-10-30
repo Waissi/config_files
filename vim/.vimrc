@@ -36,7 +36,6 @@ set shiftwidth=4
 set viminfo="NONE"
 set wildignore+=*.md
 
-
 let mapleader = "\<Space>"
 let g:asyncomplete_auto_popup = 0
 let g:startify_custom_header = []
@@ -68,7 +67,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
 nnoremap <leader>t :terminal<cr>
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . expand("%:e")<cr>
-nnoremap <leader>F :execute 'grep ' . expand('<cword>') . ' . ' . '-r --include=*.' . expand("%:e")<cr>  
+nnoremap <leader>F :execute 'grep ' . expand('<cword>') . ' . ' . '-w -r --include=*.' . expand("%:e")<cr>  
 nnoremap <leader>S :Startify<cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -80,7 +79,7 @@ nnoremap <F6> :!scripts/run.sh<cr>
 
 function! GlobalSearch()
     let word = input("Type word to search:")
-    execute 'grep ' . word . ' . ' . '-r --include=*.' . expand("%:e")
+    execute 'grep ' . word . ' . ' . '-w -r --include=*.' . expand("%:e")
 endfunction
 nnoremap <c-f> :call GlobalSearch()<cr>
 
