@@ -83,7 +83,8 @@ function! GlobalSearch(word='')
     else
         let word = a:word
     endif
-    execute 'grep ' . word . ' . ' . '-w -r --include=*.' . expand("%:e")
+    let extension = "--include='*." . expand("%:e") . "'"
+    execute 'grep ' . word . ' . ' . '-w -r ' . extension
 endfunction
 nnoremap <c-f> :call GlobalSearch()<cr>
 
