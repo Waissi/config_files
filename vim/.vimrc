@@ -66,8 +66,11 @@ nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>p :find 
 nnoremap <leader>t :terminal<cr>
+nnoremap <leader>b :call SetBreakpoint()<cr>
+nnoremap <leader>R :call GlobalFindAndReplace()<cr>
+nnoremap <leader>r :call FindAndReplace()<cr>
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . expand("%:e")<cr>
-nnoremap <leader>F :call GlobalSearch(expand('<cword>'))<cr>
+nnoremap <leader>F :call GlobalSearch()<cr>
 nnoremap <leader>S :Startify<cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -78,18 +81,34 @@ nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
 
 function! GlobalSearch(word='')
-    let word = a:word != '' ? a:word : input("Type word to search:")
+    let word = input("Word to search: ", expand('<cword>'))
     let extension = "--include='*." . expand("%:e") . "'"
     execute 'grep ' . word . ' . ' . '-w -r ' . extension
 endfunction
-nnoremap <c-f> :call GlobalSearch()<cr>
 
 function! FindAndReplace()
-    let old = expand('<cword>')
+    let old = input("Word to replace: ", expand('<cword>'))
     let new = input("Replace " . old . " with: ")
+    if new == ''
+        return
+    endif
     execute '%s/' . old . '/' . new . '/gc' 
 endfunction
-nnoremap <S-r> :call FindAndReplace()<cr>
+
+function! GlobalFindAndReplace(word='')
+    let old = input("Word to replace: ", expand('<cword>'))
+    let new = input("Replace " . old . " with: ")
+    if new == ''
+        return
+    endif
+    let sub_pattern = '\<' . old . '\>'
+    let extension = "--include='*." . expand("%:e") . "'"
+    set autowrite
+    let search_cmd = 'silent grep ' . old . ' . ' . '-w -r ' . extension
+    let replace_cmd = 'cfdo %s/' . sub_pattern . '/' . new . '/gce'
+    execute search_cmd . ' | ' . replace_cmd . ' | update'
+    set noautowrite
+endfunction
 
 function! SetBreakpoint()
     let text = ''
@@ -102,7 +121,6 @@ function! SetBreakpoint()
     let indt = indent(line('.'))
     call append(line('.') - 1, repeat(' ', indt) . text)
 endfunction
-nnoremap <leader>b :call SetBreakpoint()<cr>
 
 inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
