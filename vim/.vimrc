@@ -44,7 +44,7 @@ let g:python_highlight_all = 1
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['\.DS_Store$']
 
-colorscheme minimalist 
+colorscheme onedark 
 highlight Normal ctermbg=NONE
 highlight NonText ctermbg=NONE
 highlight NormalNC ctermbg=NONE
@@ -83,7 +83,8 @@ nnoremap <F6> :!scripts/run.sh<cr>
 function! GlobalSearch(word='')
     let word = input("Word to search: ", expand('<cword>'))
     let extension = "--include='*." . expand("%:e") . "'"
-    execute 'grep ' . word . ' . ' . '-w -r ' . extension
+    let escaped_word = shellescape(word)
+    execute 'grep ' . escaped_word . ' . ' . '-w -r ' . extension
 endfunction
 
 function! FindAndReplace()
