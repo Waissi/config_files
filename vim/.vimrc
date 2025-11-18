@@ -44,7 +44,7 @@ let g:python_highlight_all = 1
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['\.DS_Store$']
 
-colorscheme onedark 
+colorscheme minimalist 
 highlight Normal ctermbg=NONE
 highlight NonText ctermbg=NONE
 highlight NormalNC ctermbg=NONE
