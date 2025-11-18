@@ -14,6 +14,7 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 
@@ -64,7 +65,7 @@ nnoremap <leader>w :bdelete<cr>
 nnoremap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>p :find 
+nnoremap <leader>p :CtrlP()<cr> 
 nnoremap <leader>t :terminal<cr>
 nnoremap <leader>b :call SetBreakpoint()<cr>
 nnoremap <leader>R :call GlobalFindAndReplace()<cr>
