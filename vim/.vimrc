@@ -14,7 +14,8 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-fuzzbox/fuzzbox.vim'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 
@@ -44,6 +45,8 @@ let g:startify_enable_quote = 0
 let g:python_highlight_all = 1
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['\.DS_Store$']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 colorscheme minimalist 
 highlight Normal ctermbg=NONE
@@ -65,13 +68,15 @@ nnoremap <leader>w :bdelete<cr>
 nnoremap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>p :CtrlP()<cr> 
+nnoremap <leader>p :FuzzyFiles<cr>
 nnoremap <leader>t :terminal<cr>
 nnoremap <leader>b :call SetBreakpoint()<cr>
 nnoremap <leader>R :call GlobalFindAndReplace()<cr>
 nnoremap <leader>r :call FindAndReplace()<cr>
 nnoremap <leader>f :execute 'find ' . expand('<cword>') . '.' . expand("%:e")<cr>
-nnoremap <leader>F :call GlobalSearch()<cr>
+nnoremap <expr> <leader>F empty(expand('<cword>'))
+    \ ? ':FuzzyGrep ' . '<cr>'
+    \ : ':FuzzyGrep ' . expand('<cword>') . '<cr>'
 nnoremap <leader>S :Startify<cr>
 nnoremap <S-l> :bnext<cr>
 nnoremap <S-h> :bprevious<cr>
@@ -81,12 +86,6 @@ nnoremap <Up> :cprevious<cr>
 nnoremap <Down> :cnext<cr>
 nnoremap <F6> :!scripts/run.sh<cr>
 
-function! GlobalSearch(word='')
-    let word = input("Word to search: ", expand('<cword>'))
-    let extension = "--include='*." . expand("%:e") . "'"
-    let escaped_word = shellescape(word)
-    execute 'grep ' . escaped_word . ' . ' . '-w -r ' . extension
-endfunction
 
 function! FindAndReplace()
     let old = input("Word to replace: ", expand('<cword>'))
@@ -185,6 +184,7 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal signcolumn=yes
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gp <plug>(lsp-peek-definition)
     nmap <buffer> gs <plug>(lsp-document-symbol-search)
     nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
     nmap <buffer> gr <plug>(lsp-references)
